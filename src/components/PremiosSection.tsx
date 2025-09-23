@@ -9,31 +9,31 @@ const PremiosSection = () => {
   const premios = [
     {
       id: 1,
-      src: './public/assets/1.png',
+      src: '/assets/1.png',
       alt: 'Prêmio 1',
       title: '🏆 Grande Prêmio VIP'
     },
     {
       id: 2,
-      src: './public/assets/2.png',
+      src: '/assets/2.png',
       alt: 'Prêmio 2', 
       title: ' Prêmio Premium'
     },
     {
       id: 3,
-      src: './public/assets/3.png',
+      src: '/assets/3.png',
       alt: 'Prêmio 3',
       title: '🎯 Meta Especial'
     },
     {
       id: 4,
-      src: './public/assets/4.png',
+      src: '/assets/4.png',
       alt: 'Prêmio 4',
       title: ' Bônus Performance'
     },
     {
       id: 5,
-      src: './public/assets/5.png',
+      src: '/assets/5.png',
       alt: 'Prêmio 5',
       title: '🌟 Recompensa Elite'
     }
