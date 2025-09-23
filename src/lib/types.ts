@@ -1,4 +1,4 @@
-export type SubmissionStatus = 'pendente' | 'aprovado' | 'em conversa';
+export type SubmissionStatus = "pendente" | "aprovado" | "em conversa";
 
 export interface Submission {
   id: string;
@@ -8,4 +8,9 @@ export interface Submission {
   status: SubmissionStatus;
   data: string;
   timestamp: string;
+
+  // Campos administrativos opcionais
+  casa?: string;
+  tipo_comissao?: string;
+  observacoes?: string;
 }

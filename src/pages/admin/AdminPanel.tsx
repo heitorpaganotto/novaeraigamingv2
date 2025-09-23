@@ -57,8 +57,8 @@ const AdminPanel = () => {
       <header className="bg-card border-b border-border shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <div className="gradient-primary text-white font-bold text-xl px-4 py-2 rounded-lg">
-              Admin Panel
+            <div className="text-white font-bold text-xl px-4 py-2 rounded-lg">
+              Painel Administrativo
             </div>
             <Button
               onClick={handleLogout}
