@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, CheckCircle, Clock, FileText, LucideIcon } from "lucide-react";
-import { supabase } from "@/lib/supabaseClient";
 import { getSubmissions } from "@/lib/supabaseApi";
+import { supabase } from "@/lib/supabaseClient";
 import { Submission } from "@/lib/types";
 
 interface AdminDashboardProps {
@@ -15,7 +15,6 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Buscar dados iniciais
     const fetchSubmissions = async () => {
       try {
         const data = await getSubmissions();
@@ -26,16 +25,17 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
         setLoading(false);
       }
     };
+
     fetchSubmissions();
 
     // Realtime subscription
     const subscription = supabase
-      .channel("form_submissions")
+      .channel("public:form_submissions")
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "form_submissions" },
         (payload) => {
-          console.log("Realtime payload:", payload);
+          console.log("Evento Realtime:", payload);
           setSubmissions((prev) => {
             switch (payload.eventType) {
               case "INSERT":
@@ -71,6 +71,7 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
     emConversa: submissions.filter((s) => s.status === "em conversa").length,
   };
 
+  // Labels amigáveis
   const getStatusLabel = (status: Submission["status"]) => {
     switch (status) {
       case "pendente":
@@ -84,6 +85,7 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
     }
   };
 
+  // Cores para os status
   const getStatusColor = (status: Submission["status"]) => {
     switch (status) {
       case "pendente":
@@ -97,6 +99,7 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
     }
   };
 
+  // Card de estatísticas
   const StatCard = ({
     title,
     value,
@@ -129,10 +132,30 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
 
       {/* Grid de estatísticas */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard title="Total de Formulários" value={stats.total} icon={FileText} color="text-primary" />
-        <StatCard title="Pendentes" value={stats.pendentes} icon={Clock} color="text-warning" />
-        <StatCard title="Em Conversa" value={stats.emConversa} icon={Users} color="text-info" />
-        <StatCard title="Aprovados" value={stats.aprovados} icon={CheckCircle} color="text-success" />
+        <StatCard
+          title="Total de Formulários"
+          value={stats.total}
+          icon={FileText}
+          color="text-primary"
+        />
+        <StatCard
+          title="Pendentes"
+          value={stats.pendentes}
+          icon={Clock}
+          color="text-warning"
+        />
+        <StatCard
+          title="Em Conversa"
+          value={stats.emConversa}
+          icon={Users}
+          color="text-info"
+        />
+        <StatCard
+          title="Aprovados"
+          value={stats.aprovados}
+          icon={CheckCircle}
+          color="text-success"
+        />
       </div>
 
       {/* Últimas inscrições */}
@@ -142,20 +165,37 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <p className="text-muted-foreground text-center py-8">Carregando inscrições...</p>
+            <p className="text-muted-foreground text-center py-8">
+              Carregando inscrições...
+            </p>
           ) : submissions.length === 0 ? (
-            <p className="text-muted-foreground text-center py-8">Nenhuma inscrição encontrada</p>
+            <p className="text-muted-foreground text-center py-8">
+              Nenhuma inscrição encontrada
+            </p>
           ) : (
             <div className="space-y-4">
               {submissions.slice(0, 5).map((submission) => (
-                <div key={submission.id} className="flex items-center justify-between p-4 bg-background rounded-lg">
+                <div
+                  key={submission.id}
+                  className="flex items-center justify-between p-4 bg-background rounded-lg"
+                >
                   <div>
-                    <p className="font-medium text-foreground">{submission.nome}</p>
-                    <p className="text-sm text-muted-foreground">{submission.email}</p>
-                    <p className="text-xs text-muted-foreground">{submission.data}</p>
+                    <p className="font-medium text-foreground">
+                      {submission.nome}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {submission.email}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {submission.data}
+                    </p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(submission.status)}`}>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                        submission.status
+                      )}`}
+                    >
                       {getStatusLabel(submission.status)}
                     </span>
                   </div>
@@ -166,7 +206,11 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
 
           {submissions.length > 0 && (
             <div className="mt-4">
-              <Button onClick={() => onNavigate?.("respostas")} variant="outline" className="w-full">
+              <Button
+                onClick={() => onNavigate?.("respostas")}
+                variant="outline"
+                className="w-full"
+              >
                 Ver Todas as Respostas
               </Button>
             </div>
