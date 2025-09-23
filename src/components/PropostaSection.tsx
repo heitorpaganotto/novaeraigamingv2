@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
+
 interface Casino {
   id: string;
   name: string;
@@ -19,7 +20,7 @@ const casinos: Casino[] = [
   {
     id: 'bet7k',
     name: 'BET7K',
-    image: './src/assets/logo-bet7k.webp',
+    image: './public/assets/logo-bet7k.webp',
     benefits: ['Alto renome no mercado', 'CRM Integrado', 'LTV eterno', 'Pagamentos Semanais'],
     packages: [
       {
@@ -50,7 +51,7 @@ const casinos: Casino[] = [
   {
     id: 'cassinobet',
     name: 'CassinoBet',
-    image: './src/assets/logo-cassino-bet.webp',
+    image: './public/assets/logo-cassino-bet.webp',
     benefits: ['Conhecida em todo Brasil', 'CRM Integrado', 'LTV eterno', 'Pagamentos Semanais'],
     packages: [
       {
@@ -81,7 +82,7 @@ const casinos: Casino[] = [
   {
     id: 'betvera',
     name: 'BetVera',
-    image: './src/assets/logo-betvera.png',
+    image: './public/assets/logo-betvera.png',
     benefits: ['Base Zerada', 'CRM Integrado', 'LTV eterno', 'Pagamentos Semanais'],
     packages: [
       {
