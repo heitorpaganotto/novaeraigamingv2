@@ -64,7 +64,7 @@ const HomeSection = ({ onOpenForm }: { onOpenForm: () => void }) => {
                 iGAMING
               </span>
               <span className="block text-xl md:text-2xl font-semibold text-accent mt-4">
-                Programa de Sub Afiliados
+                Programa de Afiliados
               </span>
             </h1>
           </div>
@@ -77,26 +77,36 @@ const HomeSection = ({ onOpenForm }: { onOpenForm: () => void }) => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-            <Button
-              onClick={onOpenForm}
-              size="lg"
-              className="gradient-elegant hover:shadow-glow font-bold text-lg px-12 py-6 rounded-2xl border border-primary/20 hover-scale group relative overflow-hidden"
-            >
-              <span className="relative z-10 flex items-center gap-3">
-                Inscrever-se Agora
-                <span className="text-xl group-hover:translate-x-1 transition-transform duration-300">→</span>
-              </span>
-            </Button>
+          <div
+  className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-slide-up"
+  style={{ animationDelay: "0.4s" }}
+>
+  {/* Botão Inscrever-se Agora (borda verde neon girando) */}
+  <div className="glow-border glow-green rounded-2xl">
+    <Button
+      onClick={onOpenForm}
+      size="lg"
+      className="relative z-10 bg-background font-bold text-lg px-12 py-6 rounded-2xl"
+    >
+      <span className="flex items-center gap-3">
+        Inscrever-se Agora
+        <span className="text-xl group-hover:translate-x-1 transition-transform duration-300">→</span>
+      </span>
+    </Button>
+  </div>
 
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-primary/30 text-foreground hover:bg-primary/5 hover:border-primary/50 font-semibold text-lg px-12 py-6 rounded-2xl hover-scale"
-            >
-              Ver Detalhes
-            </Button>
-          </div>
+  {/* Botão Ver Detalhes (borda prata girando) */}
+  <div className="glow-border glow-silver rounded-2xl">
+    <Button
+      variant="outline"
+      size="lg"
+      className="relative z-10 bg-background font-semibold text-lg px-12 py-6 rounded-2xl"
+    >
+      Ver Detalhes
+    </Button>
+  </div>
+</div>
+
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-slide-up" style={{ animationDelay: '0.6s' }}>
             <div className="text-center p-8 glass rounded-2xl hover-lift group border border-primary/10">

@@ -83,7 +83,7 @@ const FormModal = ({ isOpen, onClose }: FormModalProps) => {
           <div className="absolute -bottom-20 -left-20 w-32 h-32 bg-accent/15 rounded-full blur-3xl" />
 
           <DialogHeader className="text-center pb-6 relative z-10">
-            <DialogTitle className="text-3xl font-black gradient-primary bg-clip-text text-transparent">
+            <DialogTitle className="text-3xl font-black white bg-clip-text">
               Inscrever-se Agora
             </DialogTitle>
             <p className="text-muted-foreground mt-2">

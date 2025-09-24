@@ -50,7 +50,10 @@ const PremiosSection = () => {
       <div className="container mx-auto relative z-10">
         <div className="text-center mb-20 animate-slide-up">
           <h2 className="text-5xl md:text-7xl font-black mb-6 gradient-primary bg-clip-text text-transparent">
-            Prêmios Exclusivos
+            Prêmios
+          </h2>
+          <h2 className='text-5xl md:text-7xl font-black mb-6 white bg-clip-text'>
+            Exclusivos
           </h2>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             <span className="text-primary font-semibold">Recompensas premium</span> esperando por você. 
@@ -148,9 +151,11 @@ const PremiosSection = () => {
         {/* Call to Action */}
         <div className="text-center mt-20 animate-slide-up" style={{ animationDelay: '0.6s' }}>
           <div className="glass rounded-2xl p-8 max-w-2xl mx-auto border border-primary/10">
-            <h3 className="text-2xl font-bold mb-4 gradient-primary bg-clip-text text-transparent">
-              🎉 Conquiste Todos os Prêmios
+            <div> 
+              <h3 className="text-2xl font-bold mb-4 gradient-primary bg-clip-text text-transparent">
+               Conquiste Todos os Prêmios
             </h3>
+            </div>
             <p className="text-muted-foreground mb-6">
               Cada meta alcançada te aproxima dessas <span className="text-primary font-semibold">recompensas exclusivas</span>
             </p>

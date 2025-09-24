@@ -18,18 +18,24 @@ const Navbar = ({ onSectionChange, onOpenForm, currentSection }: NavbarProps) =>
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-primary/10 backdrop-blur-xl">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          {/* Clean Logo */}
-          <div className="flex items-center">
-            <div className="gradient-elegant text-foreground font-black text-xl px-6 py-3 rounded-xl shadow-glow hover-scale border border-primary/20">
-              <span className="flex items-center gap-2">
-                <span className="text-2xl"></span>
-                NovaEra Gaming
-              </span>
-            </div>
-          </div>
+<nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-primary/10 backdrop-blur-xl">
+  <div className="container mx-auto px-4">
+    <div className="flex items-center justify-between h-20">
+      {/* Logo + Texto */}
+      <div className="flex items-center gap-3">
+        {/* Imagem da logo */}
+        <img 
+          src="/assets/logo_blacksheep.png" 
+          alt="BlackSheep Logo" 
+          className="h-10 w-10 object-contain"
+        />
+        <div className="gradient-elegant text-foreground font-black text-xl px-6 py-3 rounded-xl shadow-glow hover-scale border border-primary/20">
+          <span className="flex items-center gap-2">
+            BlackSheep
+          </span>
+        </div>
+      </div>
+
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">

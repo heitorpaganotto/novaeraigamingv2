@@ -17,7 +17,7 @@ All colors MUST be HSL.
     --popover: 0 0% 6%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 0% 98%;
+    --primary: 130 95% 45%;
     --primary-foreground: 0 0% 85%;
     --primary-glow: 0 0% 85%;
     --primary-dark: 0 0% 75%;
@@ -28,7 +28,7 @@ All colors MUST be HSL.
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 0 0% 85%;
+    --accent: 130 95% 45%;
     --accent-foreground: 0 0% 9%;
     --accent-secondary: 0 0% 20%;
 
@@ -42,10 +42,11 @@ All colors MUST be HSL.
     --success: 120 100% 40%;
     --warning: 38 92% 50%;
     --info: 217 91% 60%;
+    --white: 255 255% 255%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(0 0% 85%), hsl(0 0% 98%));
+    --gradient-primary: linear-gradient(135deg, hsl(130, 95%, 49%), hsl(130 95% 49%));
     --gradient-secondary: linear-gradient(135deg, hsl(0 0% 15%), hsl(0 0% 25%));
-    --gradient-gold: linear-gradient(135deg, hsl(0 0% 85%), hsl(0 0% 75%));
+    --gradient-gold: linear-gradient(135deg, hsl(130 95% 49%), hsl(130 95% 49%));
     --gradient-dark: linear-gradient(135deg, hsl(0 0% 3%), hsl(0 0% 9%));
     --gradient-elegant: linear-gradient(135deg, hsl(0 0% 9%) 0%, hsl(0 0% 15%) 50%, hsl(0 0% 25%) 100%);
     --gradient-hero: linear-gradient(135deg, hsl(0 0% 9%) 0%, hsl(0 0% 20%) 50%, hsl(0 0% 35%) 100%);
@@ -226,4 +227,64 @@ All colors MUST be HSL.
       0 0 20px hsl(var(--primary) / 0.3),
       inset 0 0 20px hsl(var(--primary) / 0.1);
   }
+}
+
+@keyframes spinBorder {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Container da borda animada */
+.glow-border {
+  position: relative;
+  display: inline-block;
+  border-radius: 1rem; /* equivalente a rounded-2xl */
+  padding: 2px;        /* espessura da borda */
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Círculo externo giratório */
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  border-radius: inherit;
+  animation: spinBorder 4s linear infinite;
+  z-index: -2;
+}
+
+/* Fundo interno que cobre o meio, deixando só a borda visível */
+.glow-border::after {
+  content: "";
+  position: absolute;
+  inset: 3px; /* mesmo valor do padding */
+  border-radius: inherit;
+  background: var(--tw-background, #fff);
+  z-index: -1;
+}
+
+/* ---- VARIAÇÕES ---- */
+
+/* Verde Neon */
+.glow-green::before {
+  background: conic-gradient(
+    #37ff14b7
+  );
+  
+}
+
+/* Prata */
+.glow-silver::before {
+  background: conic-gradient(
+    silver,
+    white,
+    silver,
+    white
+  );
+  box-shadow: 0 0 15px rgba(192, 192, 192, 0.5),
+              0 0 30px rgba(220, 220, 220, 0.3);
 }
