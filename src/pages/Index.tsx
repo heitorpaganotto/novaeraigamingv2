@@ -58,10 +58,10 @@ const HomeSection = ({ onOpenForm }: { onOpenForm: () => void }) => {
           <div className="mb-8 animate-slide-up">
             <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
               <span className="block gradient-primary bg-clip-text text-transparent">
-                NOVA ERA
+                Nova Era
               </span>
               <span className="block text-foreground mt-2">
-                iGAMING
+               Igaming
               </span>
               <span className="block text-xl md:text-2xl font-semibold text-accent mt-4">
                 Programa de Afiliados
@@ -141,27 +141,76 @@ const HomeSection = ({ onOpenForm }: { onOpenForm: () => void }) => {
               </p>
             </div>
           </div>
+          <footer className="bg-[#080808] text-gray-300 py-16">
+  <div className="container mx-auto px-6">
 
-          <div className="mt-20 animate-slide-up" style={{ animationDelay: '0.8s' }}>
-            <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <span className="text-success">✅</span>
-                <span className="font-medium">100% Seguro</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-primary">🛡️</span>
-                <span className="font-medium">Licenciado</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-accent">⭐</span>
-                <span className="font-medium">5 Estrelas</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-info">🏆</span>
-                <span className="font-medium">Líderes do Mercado</span>
-              </div>
-            </div>
+    {/* Top Section */}
+    <div className="flex flex-col md:flex-row justify-between gap-12 items-start">
+
+      {/* Logo + descrição */}
+      <div className="flex flex-col items-center md:items-start gap-4">
+        <img src="/assets/log_blacksheep2.0.png" alt="Logo BlackSheep" className="h-14 w-auto" />
+        <p className="text-gray-400 text-sm max-w-xs text-center md:text-left">
+          A BlackSheep é o maior programa de afiliados de cassino do mundo, oferecendo soluções digitais confiáveis e seguras para maximizar sua performance e ganhos online.
+        </p>
+      </div>
+
+      {/* Selos de confiança */}
+      <div className="flex flex-wrap justify-center gap-4">
+        {[
+          { icon: "✅", label: "100% Seguro", color: "text-green-500" },
+          { icon: "🛡️", label: "Licenciado", color: "text-blue-500" },
+          { icon: "⭐", label: "5 Estrelas", color: "text-yellow-400" },
+          { icon: "🏆", label: "Líderes do Mercado", color: "text-purple-500" },
+        ].map((selo, idx) => (
+          <div
+            key={idx}
+            className="flex items-center gap-2 bg-[#101010] px-4 py-2 rounded-lg border border-gray-800 transition-transform transform hover:scale-105"
+          >
+            <span className={`${selo.color} text-lg`}>{selo.icon}</span>
+            <span className="font-medium text-sm">{selo.label}</span>
           </div>
+        ))}
+      </div>
+
+      {/* Links Rápidos */}
+      <div className="flex flex-col items-center md:items-end gap-2">
+        <h3 className="text-white font-semibold mb-2">Links Rápidos</h3>
+        {["Sobre Nós", "Contato", "Política de Privacidade", "Termos de Serviço"].map((link, idx) => (
+          <a
+            key={idx}
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors text-sm"
+          >
+            {link}
+          </a>
+        ))}
+      </div>
+
+    </div>
+
+    {/* Divider */}
+    <div className="my-10 border-t border-gray-800"></div>
+
+    {/* Bottom Section */}
+    <div className="flex flex-col md:flex-row justify-between items-center text-gray-500 text-xs gap-4">
+      <span>© {new Date().getFullYear()} BlackSheep. Todos os direitos reservados.</span>
+      <div className="flex gap-4">
+        <a href="#" className="hover:text-white transition-colors">
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
+        </a>
+        <a href="#" className="hover:text-white transition-colors">
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
+        </a>
+        <a href="#" className="hover:text-white transition-colors">
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
 
         </div>
       </div>

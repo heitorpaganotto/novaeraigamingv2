@@ -25,15 +25,10 @@ const Navbar = ({ onSectionChange, onOpenForm, currentSection }: NavbarProps) =>
       <div className="flex items-center gap-3">
         {/* Imagem da logo */}
         <img 
-          src="/assets/logo_blacksheep.png" 
+          src="/assets/log_blacksheep2.0.png" 
           alt="BlackSheep Logo" 
-          className="h-10 w-10 object-contain"
+          className="h-30 w-40 object-contain"
         />
-        <div className="gradient-elegant text-foreground font-black text-xl px-6 py-3 rounded-xl shadow-glow hover-scale border border-primary/20">
-          <span className="flex items-center gap-2">
-            BlackSheep
-          </span>
-        </div>
       </div>
 
 
