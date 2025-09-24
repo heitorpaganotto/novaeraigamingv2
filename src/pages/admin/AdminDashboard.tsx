@@ -8,9 +8,10 @@ import { Submission } from "@/lib/types";
 
 interface AdminDashboardProps {
   onNavigate: (page: string) => void;
+  showLogo?: boolean; // ✅ prop opcional adicionada
 }
 
-const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
+const AdminDashboard = ({ onNavigate, showLogo }: AdminDashboardProps) => {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -35,7 +36,6 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
         "postgres_changes",
         { event: "*", schema: "public", table: "form_submissions" },
         (payload) => {
-          console.log("Evento Realtime:", payload);
           setSubmissions((prev) => {
             switch (payload.eventType) {
               case "INSERT":
@@ -71,35 +71,24 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
     emConversa: submissions.filter((s) => s.status === "em conversa").length,
   };
 
-  // Labels amigáveis
   const getStatusLabel = (status: Submission["status"]) => {
     switch (status) {
-      case "pendente":
-        return "Pendente";
-      case "aprovado":
-        return "Aprovado";
-      case "em conversa":
-        return "Em Conversa";
-      default:
-        return status;
+      case "pendente": return "Pendente";
+      case "aprovado": return "Aprovado";
+      case "em conversa": return "Em Conversa";
+      default: return status;
     }
   };
 
-  // Cores para os status
   const getStatusColor = (status: Submission["status"]) => {
     switch (status) {
-      case "pendente":
-        return "bg-warning/20 text-warning";
-      case "aprovado":
-        return "bg-success/20 text-success";
-      case "em conversa":
-        return "bg-info/20 text-info";
-      default:
-        return "bg-gray-100 text-gray-600";
+      case "pendente": return "bg-warning/20 text-warning";
+      case "aprovado": return "bg-success/20 text-success";
+      case "em conversa": return "bg-info/20 text-info";
+      default: return "bg-gray-100 text-gray-600";
     }
   };
 
-  // Card de estatísticas
   const StatCard = ({
     title,
     value,
@@ -124,38 +113,12 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold white bg-clip-text">
-          Dashboard
-        </h1>
-      </div>
-
       {/* Grid de estatísticas */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard
-          title="Total de Formulários"
-          value={stats.total}
-          icon={FileText}
-          color="text-primary"
-        />
-        <StatCard
-          title="Pendentes"
-          value={stats.pendentes}
-          icon={Clock}
-          color="text-warning"
-        />
-        <StatCard
-          title="Em Conversa"
-          value={stats.emConversa}
-          icon={Users}
-          color="text-info"
-        />
-        <StatCard
-          title="Aprovados"
-          value={stats.aprovados}
-          icon={CheckCircle}
-          color="text-success"
-        />
+        <StatCard title="Total de Formulários" value={stats.total} icon={FileText} color="text-primary" />
+        <StatCard title="Pendentes" value={stats.pendentes} icon={Clock} color="text-warning" />
+        <StatCard title="Em Conversa" value={stats.emConversa} icon={Users} color="text-info" />
+        <StatCard title="Aprovados" value={stats.aprovados} icon={CheckCircle} color="text-success" />
       </div>
 
       {/* Últimas inscrições */}
@@ -165,37 +128,20 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <p className="text-muted-foreground text-center py-8">
-              Carregando inscrições...
-            </p>
+            <p className="text-muted-foreground text-center py-8">Carregando inscrições...</p>
           ) : submissions.length === 0 ? (
-            <p className="text-muted-foreground text-center py-8">
-              Nenhuma inscrição encontrada
-            </p>
+            <p className="text-muted-foreground text-center py-8">Nenhuma inscrição encontrada</p>
           ) : (
             <div className="space-y-4">
               {submissions.slice(0, 5).map((submission) => (
-                <div
-                  key={submission.id}
-                  className="flex items-center justify-between p-4 bg-background rounded-lg"
-                >
+                <div key={submission.id} className="flex items-center justify-between p-4 bg-background rounded-lg">
                   <div>
-                    <p className="font-medium text-foreground">
-                      {submission.nome}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {submission.email}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {submission.data}
-                    </p>
+                    <p className="font-medium text-foreground">{submission.nome}</p>
+                    <p className="text-sm text-muted-foreground">{submission.email}</p>
+                    <p className="text-xs text-muted-foreground">{submission.data}</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                        submission.status
-                      )}`}
-                    >
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(submission.status)}`}>
                       {getStatusLabel(submission.status)}
                     </span>
                   </div>
@@ -206,11 +152,7 @@ const AdminDashboard = ({ onNavigate }: AdminDashboardProps) => {
 
           {submissions.length > 0 && (
             <div className="mt-4">
-              <Button
-                onClick={() => onNavigate?.("respostas")}
-                variant="outline"
-                className="w-full"
-              >
+              <Button onClick={() => onNavigate?.("respostas")} variant="outline" className="w-full">
                 Ver Todas as Respostas
               </Button>
             </div>
