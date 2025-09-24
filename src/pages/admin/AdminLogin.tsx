@@ -38,18 +38,28 @@ const AdminLogin = ({ onLogin }: AdminLoginProps) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-background">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-background relative">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
       </div>
 
       <Card className="w-full max-w-md shadow-card bg-card border-border relative z-10">
-        <CardHeader>
+        <CardHeader className="flex flex-col items-center gap-4">
+          
+          {/* Logo */}
+          <img
+            src="/assets/log_blacksheep2.0.png"
+            alt="Logo BlackSheep"
+            className="h-16 w-auto"
+          />
+
+          {/* Título */}
           <CardTitle className="text-2xl font-bold text-center gradient-primary bg-clip-text text-transparent">
             Painel Administrativo
           </CardTitle>
         </CardHeader>
+
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">

@@ -132,8 +132,9 @@ const PropostaSection = () => {
       <div className="container mx-auto relative z-10">
         <div className="text-center mb-20 animate-slide-up">
           <h2 className="text-5xl md:text-7xl font-black mb-6 gradient-primary bg-clip-text text-transparent">
-            Nossas Propostas
+            Nossas
           </h2>
+          <h2 className='text-5xl md:text-7xl font-black mb-6 white bg-clip-text'>Propostas</h2>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             <span className="text-primary font-semibold">Três cassinos premium</span> com ofertas exclusivas. 
             Clique em cada proposta para descobrir <span className="text-accent font-semibold">oportunidades únicas</span> de ganhos.
