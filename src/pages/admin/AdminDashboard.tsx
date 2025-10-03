@@ -1,67 +1,18 @@
-import { useState, useEffect } from "react";
+// src/pages/admin/AdminDashboard.tsx
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, CheckCircle, Clock, FileText, LucideIcon } from "lucide-react";
-import { getSubmissions } from "@/lib/supabaseApi";
-import { supabase } from "@/lib/supabaseClient";
 import { Submission } from "@/lib/types";
 
 interface AdminDashboardProps {
   onNavigate: (page: string) => void;
-  showLogo?: boolean; // ✅ prop opcional adicionada
+  submissions: Submission[];
+  showLogo?: boolean;
 }
 
-const AdminDashboard = ({ onNavigate, showLogo }: AdminDashboardProps) => {
-  const [submissions, setSubmissions] = useState<Submission[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchSubmissions = async () => {
-      try {
-        const data = await getSubmissions();
-        setSubmissions(data);
-      } catch (error) {
-        console.error("Erro ao buscar inscrições:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSubmissions();
-
-    // Realtime subscription
-    const subscription = supabase
-      .channel("public:form_submissions")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "form_submissions" },
-        (payload) => {
-          setSubmissions((prev) => {
-            switch (payload.eventType) {
-              case "INSERT":
-                return [payload.new as Submission, ...prev];
-              case "UPDATE":
-                return prev.map((item) =>
-                  item.id === (payload.new as Submission).id
-                    ? (payload.new as Submission)
-                    : item
-                );
-              case "DELETE":
-                return prev.filter(
-                  (item) => item.id !== (payload.old as Submission).id
-                );
-              default:
-                return prev;
-            }
-          });
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(subscription);
-    };
-  }, []);
+const AdminDashboard = ({ onNavigate, submissions }: AdminDashboardProps) => {
+  const [loading, setLoading] = useState(false);
 
   // Estatísticas
   const stats = {
@@ -73,19 +24,27 @@ const AdminDashboard = ({ onNavigate, showLogo }: AdminDashboardProps) => {
 
   const getStatusLabel = (status: Submission["status"]) => {
     switch (status) {
-      case "pendente": return "Pendente";
-      case "aprovado": return "Aprovado";
-      case "em conversa": return "Em Conversa";
-      default: return status;
+      case "pendente":
+        return "Pendente";
+      case "aprovado":
+        return "Aprovado";
+      case "em conversa":
+        return "Em Conversa";
+      default:
+        return status;
     }
   };
 
   const getStatusColor = (status: Submission["status"]) => {
     switch (status) {
-      case "pendente": return "bg-warning/20 text-warning";
-      case "aprovado": return "bg-success/20 text-success";
-      case "em conversa": return "bg-info/20 text-info";
-      default: return "bg-gray-100 text-gray-600";
+      case "pendente":
+        return "bg-warning/20 text-warning";
+      case "aprovado":
+        return "bg-success/20 text-success";
+      case "em conversa":
+        return "bg-info/20 text-info";
+      default:
+        return "bg-gray-100 text-gray-600";
     }
   };
 
@@ -152,7 +111,7 @@ const AdminDashboard = ({ onNavigate, showLogo }: AdminDashboardProps) => {
 
           {submissions.length > 0 && (
             <div className="mt-4">
-              <Button onClick={() => onNavigate?.("respostas")} variant="outline" className="w-full">
+              <Button onClick={() => onNavigate("respostas")} variant="outline" className="w-full">
                 Ver Todas as Respostas
               </Button>
             </div>

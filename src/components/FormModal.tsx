@@ -1,4 +1,5 @@
-import { useState } from "react";
+// src/components/FormModal.tsx
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -9,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { supabase } from "@/lib/supabaseClient"; // Importa o client do Supabase
+import { supabase } from "@/lib/supabaseClient";
 
 interface FormData {
   nome: string;
@@ -20,9 +21,10 @@ interface FormData {
 interface FormModalProps {
   isOpen: boolean;
   onClose: () => void;
+  linkId?: number; // ✅ agora é opcional
 }
 
-const FormModal = ({ isOpen, onClose }: FormModalProps) => {
+const FormModal = ({ isOpen, onClose, linkId }: FormModalProps) => {
   const [formData, setFormData] = useState<FormData>({
     nome: "",
     email: "",
@@ -32,20 +34,28 @@ const FormModal = ({ isOpen, onClose }: FormModalProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!linkId) {
+      toast({
+        title: "❌ Erro",
+        description: "Nenhum link selecionado.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Inserção no Supabase (tipo corrigido)
-      const { error } = await supabase
-        .from("form_submissions") // só o nome da tabela
-        .insert({
-          nome: formData.nome,
-          email: formData.email,
-          telefone: formData.telefone,
-          status: "pendente",
-          data: new Date().toLocaleDateString("pt-BR"),
-          timestamp: new Date().toISOString(),
-        });
+      const { error } = await supabase.from("form_submissions").insert({
+        nome: formData.nome,
+        email: formData.email,
+        telefone: formData.telefone,
+        status: "pendente",
+        data: new Date().toLocaleDateString("pt-BR"),
+        timestamp: new Date().toISOString(),
+        link_id: linkId,
+      });
 
       if (error) throw error;
 
@@ -78,7 +88,6 @@ const FormModal = ({ isOpen, onClose }: FormModalProps) => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-lg glass border border-primary/30 rounded-3xl">
         <div className="relative">
-          {/* Background Effect */}
           <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl" />
           <div className="absolute -bottom-20 -left-20 w-32 h-32 bg-accent/15 rounded-full blur-3xl" />
 
@@ -89,15 +98,11 @@ const FormModal = ({ isOpen, onClose }: FormModalProps) => {
             <p className="text-muted-foreground mt-2">
               <span className="text-primary font-semibold">Últimos dias</span>{" "}
               para aproveitar essas
-              <span className="text-accent font-semibold">
-                {" "}
-                condições especiais
-              </span>
+              <span className="text-accent font-semibold"> condições especiais</span>
             </p>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-            {/* Nome */}
             <div className="space-y-2">
               <Label htmlFor="nome" className="font-semibold flex items-center gap-2">
                 Nome Completo
@@ -112,7 +117,6 @@ const FormModal = ({ isOpen, onClose }: FormModalProps) => {
               />
             </div>
 
-            {/* Email */}
             <div className="space-y-2">
               <Label htmlFor="email" className="font-semibold flex items-center gap-2">
                 Email
@@ -127,7 +131,6 @@ const FormModal = ({ isOpen, onClose }: FormModalProps) => {
               />
             </div>
 
-            {/* Telefone */}
             <div className="space-y-2">
               <Label htmlFor="telefone" className="font-semibold flex items-center gap-2">
                 Telefone
@@ -142,14 +145,8 @@ const FormModal = ({ isOpen, onClose }: FormModalProps) => {
               />
             </div>
 
-            {/* Botões */}
             <div className="flex gap-4 pt-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={onClose}
-                disabled={isSubmitting}
-              >
+              <Button type="button" variant="outline" onClick={onClose} disabled={isSubmitting}>
                 Cancelar
               </Button>
               <Button type="submit" disabled={isSubmitting}>
