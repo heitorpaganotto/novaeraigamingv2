@@ -50,7 +50,7 @@ const casinos: Casino[] = [
   {
     id: 'cassinobet',
     name: 'CassinoBet',
-    image: '/assets/logo-cassino-bet.webp',
+    image: '/assets/logo-cassino-bet.jpg',
     benefits: ['Conhecida em todo Brasil', 'CRM Integrado', 'LTV eterno', 'Pagamentos Semanais'],
     packages: [
       {
