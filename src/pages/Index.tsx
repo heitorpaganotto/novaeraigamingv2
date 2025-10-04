@@ -192,21 +192,72 @@ const HomeSection = ({ onOpenForm }: { onOpenForm: () => void }) => {
     {/* Divider */}
     <div className="my-10 border-t border-gray-800"></div>
 
-    {/* Bottom Section */}
-    <div className="flex flex-col md:flex-row justify-between items-center text-gray-500 text-xs gap-4">
-      <span>© {new Date().getFullYear()} BlackSheep. Todos os direitos reservados.</span>
-      <div className="flex gap-4">
-        <a href="#" className="hover:text-white transition-colors">
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
-        </a>
-        <a href="#" className="hover:text-white transition-colors">
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
-        </a>
-        <a href="#" className="hover:text-white transition-colors">
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
-        </a>
-      </div>
-    </div>
+   {/* Bottom Section */}
+<div className="flex flex-col md:flex-row justify-between items-center text-gray-500 text-xs gap-4">
+  <span>© {new Date().getFullYear()} BlackSheep. Todos os direitos reservados.</span>
+  <div className="flex gap-4">
+    {/* Facebook */}
+    <a href="#" className="hover:text-white transition-colors">
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M22.675 0h-21.35C.6 0 0 .6 0 1.325v21.351C0 23.4.6 24 1.325 
+        24h11.495v-9.294H9.691V11.01h3.129V8.413c0-3.1 1.893-4.788 
+        4.659-4.788 1.325 0 2.463.099 2.794.143v3.24l-1.918.001c-1.504 
+        0-1.796.715-1.796 1.763v2.312h3.587l-.467 3.696h-3.12V24h6.116C23.4 
+        24 24 23.4 24 22.676V1.325C24 .6 23.4 0 22.675 0z"/>
+      </svg>
+    </a>
+
+    {/* Twitter */}
+    <a href="#" className="hover:text-white transition-colors">
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M24 4.557a9.83 9.83 0 0 1-2.828.775 
+        4.932 4.932 0 0 0 2.165-2.724c-.951.555-2.005.959-3.127 
+        1.184A4.916 4.916 0 0 0 16.616 3c-2.724 0-4.932 
+        2.208-4.932 4.932 0 .386.045.762.127 
+        1.124C7.728 8.87 4.1 6.89 1.671 
+        3.905a4.93 4.93 0 0 0-.666 
+        2.479c0 1.708.869 3.216 2.188 
+        4.099a4.904 4.904 0 0 1-2.229-.616v.062c0 
+        2.385 1.693 4.374 3.946 
+        4.827a4.935 4.935 0 0 1-2.224.084 
+        4.928 4.928 0 0 0 4.6 3.417A9.867 
+        9.867 0 0 1 0 19.54a13.933 13.933 0 0 0 
+        7.548 2.212c9.057 0 14.01-7.514 
+        14.01-14.01 0-.213-.005-.425-.014-.636A10.012 
+        10.012 0 0 0 24 4.557z"/>
+      </svg>
+    </a>
+
+    {/* Instagram */}
+    <a href="#" className="hover:text-white transition-colors">
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2.163c3.204 0 3.584.012 
+        4.85.07 1.366.062 2.633.35 3.608 
+        1.325.975.975 1.263 2.242 1.325 
+        3.608.058 1.266.07 1.646.07 
+        4.85s-.012 3.584-.07 4.85c-.062 
+        1.366-.35 2.633-1.325 3.608-.975.975-2.242 
+        1.263-3.608 1.325-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.35-3.608-1.325-.975-.975-1.263-2.242-1.325-3.608C2.175 
+        15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.062-1.366.35-2.633 
+        1.325-3.608.975-.975 2.242-1.263 3.608-1.325C8.416 
+        2.175 8.796 2.163 12 2.163zm0 
+        1.837c-3.17 0-3.549.012-4.796.07-1.05.048-1.62.218-1.993.465-.423.27-.723.59-.993 
+        1.012-.247.373-.417.943-.465 
+        1.993-.058 1.247-.07 1.626-.07 
+        4.796s.012 3.549.07 4.796c.048 1.05.218 
+        1.62.465 1.993.27.423.59.723 
+        1.012.993.373.247.943.417 
+        1.993.465 1.247.058 1.626.07 
+        4.796.07s3.549-.012 4.796-.07c1.05-.048 
+        1.62-.218 1.993-.465.423-.27.723-.59.993-1.012.247-.373.417-.943.465-1.993.058-1.247.07-1.626.07-4.796s-.012-3.549-.07-4.796c-.048-1.05-.218-1.62-.465-1.993-.27-.423-.59-.723-1.012-.993-.373-.247-.943-.417-1.993-.465-1.247-.058-1.626-.07-4.796-.07zm0 
+        3.738a6.299 6.299 0 1 1 0 12.598 6.299 6.299 0 0 1 0-12.598zm0 
+        10.413a4.114 4.114 0 1 0 0-8.228 4.114 4.114 0 0 0 0 8.228zm6.406-11.845a1.44 
+        1.44 0 1 1 0-2.881 1.44 1.44 0 0 1 0 2.881z"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
 
   </div>
 </footer>

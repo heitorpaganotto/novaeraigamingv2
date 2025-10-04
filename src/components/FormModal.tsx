@@ -1,5 +1,5 @@
 // src/components/FormModal.tsx
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -21,7 +21,7 @@ interface FormData {
 interface FormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  linkId?: number; // ✅ agora é opcional
+  linkId?: number; // ainda pode ser passado, mas não é obrigatório
 }
 
 const FormModal = ({ isOpen, onClose, linkId }: FormModalProps) => {
@@ -34,16 +34,6 @@ const FormModal = ({ isOpen, onClose, linkId }: FormModalProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!linkId) {
-      toast({
-        title: "❌ Erro",
-        description: "Nenhum link selecionado.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -54,7 +44,7 @@ const FormModal = ({ isOpen, onClose, linkId }: FormModalProps) => {
         status: "pendente",
         data: new Date().toLocaleDateString("pt-BR"),
         timestamp: new Date().toISOString(),
-        link_id: linkId,
+        ...(linkId && { link_id: linkId }), // só insere se tiver link
       });
 
       if (error) throw error;
