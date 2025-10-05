@@ -15,6 +15,7 @@ import AdminDashboard from "./AdminDashboard";
 import AdminRespostas from "./AdminRespostas";
 import AdminLogin from "./AdminLogin";
 import AdminMetrics from "./AdminMetrics";
+import AdminWhatsapp from "./AdminWhatsapp";
 import FormModal from "@/components/FormModal";
 import { supabase } from "@/lib/supabaseClient";
 import { Submission } from "@/lib/types";
@@ -130,6 +131,8 @@ const AdminPanel = () => {
     { id: "respostas", label: "Respostas", icon: MessageSquare },
     { id: "links", label: "Links", icon: LinkIcon },
     { id: "analytics", label: "Analytics", icon: BarChart3 },
+    { id: "whatsapp", label: "WhatsApp", icon: MessageSquare }, 
+
   ];
 
   const externalLinks: ExternalLink[] = [
@@ -138,27 +141,26 @@ const AdminPanel = () => {
   ];
 
   const renderContent = () => {
-    switch (currentPage) {
-      case "respostas":
-        return <AdminRespostas />;
-      case "links":
-        return (
-          <AdminLinks
-            onNavigate={fetchLinksAnalytics} // ✅ props corretas
-          />
-        );
-      case "analytics":
-        return <AdminMetrics />;
-      case "dashboard":
-      default:
-        return (
-          <AdminDashboard
-            onNavigate={setCurrentPage}
-            submissions={formSubmissions} // ✅ adiciona submissions
-          />
-        );
-    }
-  };
+  switch (currentPage) {
+    case "respostas":
+      return <AdminRespostas />;
+    case "links":
+      return <AdminLinks onNavigate={fetchLinksAnalytics} />;
+    case "analytics":
+      return <AdminMetrics />;
+    case "whatsapp":
+      return <AdminWhatsapp />; // ✅ nova aba
+    case "dashboard":
+    default:
+      return (
+        <AdminDashboard
+          onNavigate={setCurrentPage}
+          submissions={formSubmissions}
+        />
+      );
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-[#080808] flex flex-col">
