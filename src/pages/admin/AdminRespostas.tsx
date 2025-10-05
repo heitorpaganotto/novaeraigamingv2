@@ -333,28 +333,52 @@ const AdminRespostas = () => {
                       </Select>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => openViewModal(sub)}
-                      >
-                        Visualizar
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="secondary"
-                        onClick={() => openEditModal(sub)}
-                      >
-                        Editar
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="destructive"
-                        onClick={() => handleDelete(sub.id)}
-                      >
-                        Excluir
-                      </Button>
-                    </div>
+  <Button
+    size="sm"
+    variant="outline"
+    onClick={() => openViewModal(sub)}
+  >
+    Visualizar
+  </Button>
+  <Button
+    size="sm"
+    variant="secondary"
+    onClick={() => openEditModal(sub)}
+  >
+    Editar
+  </Button>
+  <Button
+    size="sm"
+    variant="destructive"
+    onClick={() => handleDelete(sub.id)}
+  >
+    Excluir
+  </Button>
+  <Button
+    size="sm"
+    className="bg-green-600 hover:bg-green-700 text-white"
+    onClick={() => {
+      const cleanedPhone = sub.telefone
+        .replace(/\D/g, "") // Remove não-números
+        .replace(/^0+/, ""); // Remove zeros à esquerda
+
+      if (cleanedPhone.length < 10) {
+        alert("Número de telefone inválido.");
+        return;
+      }
+
+      const defaultMessage = encodeURIComponent(
+        `Olá ${sub.nome}, tudo bem? Estou entrando em contato sobre sua inscrição.`
+      );
+
+      const whatsappUrl = `https://wa.me/55${cleanedPhone}?text=${defaultMessage}`;
+      window.open(whatsappUrl, "_blank");
+    }}
+  >
+    Conversar
+  </Button>
+</div>
+
                   </div>
                 </div>
               ))}
